@@ -16,19 +16,20 @@ struct Node {
       delete itr->second;
     }
   }
-  void insert(int position, string value)
+  bool insert(int position, string value)
   {
     if(position == value.length())
     {
+      if(isNode){return false;}
       isNode = true;
-      return;
+      return true;
     }
     Node** temp = &(children[value[position]]);
     if(!(*temp))
     {
       *temp = new Node;
     }
-    (*temp)->insert(position+1, value);
+    return (*temp)->insert(position+1, value);
   }
   Node* search(string word, int position)
   {
@@ -80,6 +81,26 @@ struct Node {
       if(it->second)
       {
         it->second->print(values, lev+1, exp);
+      }
+    }
+  }
+  void printwds(vector<char> &vals)
+  {
+    for(auto it = children.begin(); it !=  children.end(); it++)
+    {
+      if(it->second)
+      {
+        vals.push_back(it->first);
+        if(it->second->isNode)
+        {
+          for(char &i : vals)
+          {
+            cout << i;
+          }
+          cout << endl;
+        }
+        it->second->printwds(vals);
+        vals.pop_back();
       }
     }
   }

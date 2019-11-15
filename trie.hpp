@@ -25,6 +25,7 @@ public:
   }
   bool search_by_prefix(string word)
   {
+    if(!root){return false;}
     Node* temp = search(word);
     if(temp)
     {
@@ -42,6 +43,7 @@ public:
   }
   bool search_by_complete_word(string word)
   {
+    if(!root){return false;}
     Node* temp = search(word);
     if(temp)
     {
@@ -59,10 +61,12 @@ public:
   }
   void delet(string word)
   {
+    if(!root){return;}
     root->delet(word, 0);
   }
   void print()
   {
+    if(!root){return;}
     for(int i = 0; true; i++)
     {
       vector<char> elements;
@@ -78,6 +82,12 @@ public:
       }
       elements.clear();
     }
+  }
+  void printwords()
+  {
+    if(!root){return;}
+    vector<char> elements;
+    root->printwds(elements);
   }
 };
 

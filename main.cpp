@@ -1,14 +1,15 @@
 #include "./trie.hpp"
+#include <fstream>
 int main()
 {
   Trie a;
-  a.insert("OWO");
-  a.insert("AWO");
-  a.insert("UWO");
-  a.insert("UWU");
-  cout << a.search_by_complete_word("OWO") << endl;
-  a.delet("OW");
-  cout << a.search_by_prefix("OW") << endl;
-  a.print();
+  ifstream val("ApellidosDeLaLibertad.txt");
+  string value;
+  while(val >> value)
+  {
+    a.insert(value);
+  }
+  a.printwords();
+  val.close();
   return 0;
 }
